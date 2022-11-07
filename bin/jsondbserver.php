@@ -15,4 +15,4 @@ if (empty($arg1)) {
     exit;
 }
 
-print JsonDBServ::execute($arg1, ...$restArgs);
+JsonDBServ::execute($arg1, ...$restArgs);

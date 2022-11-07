@@ -4,6 +4,7 @@ namespace src\JsonDBServ;
 
 use JetBrains\PhpStorm\NoReturn;
 use JsonException;
+use src\InstantCache\InstantCache;
 use src\JsonDB\JsonDB;
 
 class JsonDBServ
@@ -52,7 +53,7 @@ class JsonDBServ
             die(255);
         }
 
-        print "Inserted. 1 row affected.";
+        print "Inserted. 1 row affected.".PHP_EOL;
         die(0);
     }
 
@@ -74,7 +75,7 @@ class JsonDBServ
 
         $jsonDB->delete($idCol, $idVal);
 
-        print "Deleted. 1 row affected.";
+        print "Deleted. 1 row affected.".PHP_EOL;
         die(0);
     }
 
@@ -86,7 +87,7 @@ class JsonDBServ
         $jsonDB = self::generateJsonDB($arguments);
 
         $where = json_decode($arguments[1] ?? '[]', true, 512, JSON_THROW_ON_ERROR);
-        $allowLike = (bool) ($arguments[2] ?? 'false');
+        $allowLike = (bool) ($arguments[2] ?? '0');
         $sortBy = (bool) ($arguments[3] ?? 'true');
         $sortByColumn = $arguments[4] ?? 'id';
         $sortByType = $arguments[5] ?? 'string';
@@ -120,7 +121,7 @@ class JsonDBServ
         $page = (int) ($arguments[1] ?? '1');
         $perPage = (int) ($arguments[2] ?? '10');
         $where = json_decode($arguments[3] ?? '[]', true, 512, JSON_THROW_ON_ERROR);
-        $allowLike = (bool) ($arguments[4] ?? 'false');
+        $allowLike = (bool) ($arguments[4] ?? '0');
         $sortBy = (bool) ($arguments[5] ?? 'true');
         $sortByColumn = $arguments[6] ?? 'id';
         $sortByType = $arguments[7] ?? 'string';
@@ -149,7 +150,28 @@ class JsonDBServ
         $count = count($jsonDB->getContent());
         $jsonDB->deleteAll();
 
-        print "Deleted. $count rows affected.";
+        print "Deleted. $count rows affected.".PHP_EOL;
+        die(0);
+    }
+    
+    private static function update(string ...$arguments): void
+    {
+        $jsonDB = self::generateJsonDB($arguments);
+
+        $idCol = $arguments[1] ?? null;
+        $idVal = $arguments[2] ?? null;
+        $newRowData = json_decode($arguments[3] ?? '[]', true, 512, JSON_THROW_ON_ERROR);
+
+        if (empty($idCol) || empty($idVal) || empty($newRowData)) {
+            print 'Usage: jsondbserver update <table> <idCol> <idVal> <newRowData>';
+            die(255);
+        }
+
+        $jsonDB->changeSelect($idCol, $idVal, $newRowData);
+
+        $rowsAffected = InstantCache::get('rowsUpdated');
+
+        print "Updated. $rowsAffected rows affected.".PHP_EOL;
         die(0);
     }
 

@@ -30,7 +30,7 @@ class JsonDB
     {
         $content = $this->load();
 
-        // Search through each row of $content until $content[$idCol] = $idVal
+        // Search through each row of $content until $row[$idCol] = $idVal
         foreach ($content as $row) {
             if ($row[$idCol] === $idVal) {
                 // Only change if the value is different
@@ -127,6 +127,8 @@ class JsonDB
     {
         $content = $this->load();
 
+        InstantCache::set('rowsUpdated', 0);
+
         // Search through each row of $content until $content[$idCol] = $idVal
         foreach ($content as $rowId => $row) {
             if ($row[$idCol] === $idVal) {
@@ -134,8 +136,10 @@ class JsonDB
                 foreach ($data as $column => $value) {
                     if (isset($row[$column]) && $row[$column] !== $value) {
                         $content[$rowId][$column] = $value;
+                        InstantCache::set('rowsUpdated', InstantCache::get('rowsUpdated') + 1);
                     } elseif (!isset($row[$column])) {
                         $content[$rowId][$column] = $value;
+                        InstantCache::set('rowsUpdated', InstantCache::get('rowsUpdated') + 1);
                     }
                 }
                 $this->save($content);

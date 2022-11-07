@@ -26,7 +26,7 @@ class Manual {
         }
 
         $output .= PHP_EOL;
-        $output .= 'For more information about a command, use: jsondbserver help <command>';
+        $output .= 'For more information about a command, use:'.PHP_EOL.'jsondbserver help <command>';
 
         print $output;
         die(0);
@@ -41,6 +41,19 @@ EOT;
     private static function delete() {
         echo <<<EOT
 Usage: jsondbserver delete <table> <idCol> <idVal>
+EOT;
+    }
+
+    private static function update() {
+        echo <<<EOT
+Usage: jsondbserver update <table> <idCol> <idVal> <newRowData>
+EOT;
+    }
+
+    private static function select()
+    {
+        echo <<<EOT
+Usage: jsondbserver select <table> <where> <allowLike> <sortBy> <sortByColumn> <sortByType> <descending> <firstWhereAnd> <wheres>
 EOT;
     }
 }
