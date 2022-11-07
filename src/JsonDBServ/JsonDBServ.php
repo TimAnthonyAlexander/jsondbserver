@@ -32,5 +32,8 @@ class JsonDBServ
             print 'Invalid JSON.' . PHP_EOL . $e->getMessage() . PHP_EOL;
             die(255);
         }
+
+        print "Inserted. 1 row affected." . PHP_EOL;
+        die(0);
     }
 }
