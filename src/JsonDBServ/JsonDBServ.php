@@ -25,11 +25,17 @@ class JsonDBServ
         die(255);
     }
 
+    #[NoReturn] private static function help(string ...$arguments): void
+    {
+        Manual::route($arguments[0] ?? 'general');
+        die(0);
+    }
+
     /**
      * @param string ...$arguments
      * @return void
      */
-    private static function insert(string ...$arguments): void
+    #[NoReturn] private static function insert(string ...$arguments): void
     {
         $jsonDB = self::generateJsonDB($arguments);
         $json  = $arguments[1] ?? null;
@@ -55,7 +61,7 @@ class JsonDBServ
      * @return void
      * @throws JsonException
      */
-    private static function delete(string ...$arguments): void
+    #[NoReturn] private static function delete(string ...$arguments): void
     {
         $jsonDB = self::generateJsonDB($arguments);
         $idCol = $arguments[1] ?? null;
@@ -75,7 +81,7 @@ class JsonDBServ
     /**
      * @throws JsonException
      */
-    private static function select(string ...$arguments): void
+    #[NoReturn] private static function select(string ...$arguments): void
     {
         $jsonDB = self::generateJsonDB($arguments);
 
@@ -107,7 +113,36 @@ class JsonDBServ
         die(0);
     }
 
-    private static function deletetable(string ...$arguments): void
+    private static function selectPage(string ...$arguments): void
+    {
+        $jsonDB = self::generateJsonDB($arguments);
+
+        $page = (int) ($arguments[1] ?? '1');
+        $perPage = (int) ($arguments[2] ?? '10');
+        $where = json_decode($arguments[3] ?? '[]', true, 512, JSON_THROW_ON_ERROR);
+        $allowLike = (bool) ($arguments[4] ?? 'false');
+        $sortBy = (bool) ($arguments[5] ?? 'true');
+        $sortByColumn = $arguments[6] ?? 'id';
+        $sortByType = $arguments[7] ?? 'string';
+        $descending = (bool) ($arguments[8] ?? 'true');
+        $firstWhereAnd = (bool) ($arguments[9] ?? 'true');
+        $wheres = array_slice($arguments, 10);
+
+        if ($where === null) {
+            print 'Usage: jsondbserver select <table> <page> <perpage> <where> <allowLike> <sortBy> <sortByColumn> <sortByType> <descending> <firstWhereAnd> <wheres>';
+            die(255);
+        }
+
+        $result = $jsonDB->getPage($page, $perPage, $where, $sortBy, $sortByColumn, $sortByType, $descending, $allowLike, $firstWhereAnd, $wheres);
+
+        print json_encode($result, JSON_THROW_ON_ERROR | JSON_PRETTY_PRINT);
+        die(0);
+    }
+
+    /**
+     * @throws JsonException
+     */
+    #[NoReturn] private static function deletetable(string ...$arguments): void
     {
         $jsonDB = self::generateJsonDB($arguments);
 

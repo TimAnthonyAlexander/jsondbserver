@@ -33,6 +33,7 @@ class ComposerStaticInit684364e6af3817dd4e45d4ee574e592b
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
         'src\\InstantCache\\InstantCache' => __DIR__ . '/../..' . '/src/InstantCache/InstantCache.php',
         'src\\JsonDBServ\\JsonDBServ' => __DIR__ . '/../..' . '/src/JsonDBServ/JsonDBServ.php',
+        'src\\JsonDBServ\\Manual' => __DIR__ . '/../..' . '/src/JsonDBServ/Manual.php',
         'src\\JsonDB\\JsonDB' => __DIR__ . '/../..' . '/src/JsonDB/JsonDB.php',
     );
 

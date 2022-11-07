@@ -9,5 +9,6 @@ return array(
     'Composer\\InstalledVersions' => $vendorDir . '/composer/InstalledVersions.php',
     'src\\InstantCache\\InstantCache' => $baseDir . '/src/InstantCache/InstantCache.php',
     'src\\JsonDBServ\\JsonDBServ' => $baseDir . '/src/JsonDBServ/JsonDBServ.php',
+    'src\\JsonDBServ\\Manual' => $baseDir . '/src/JsonDBServ/Manual.php',
     'src\\JsonDB\\JsonDB' => $baseDir . '/src/JsonDB/JsonDB.php',
 );
