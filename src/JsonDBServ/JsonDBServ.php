@@ -21,7 +21,7 @@ class JsonDBServ
             self::$command(...$arguments);
         }
 
-        echo sprintf('Command "%s" not found.%s', $command, PHP_EOL);
+        echo sprintf('Command "%s" not found.', $command);
         die(255);
     }
 
@@ -48,11 +48,11 @@ class JsonDBServ
         try {
             $jsonDB->add('id', $maxId + 1, json_decode($json, true, 512, JSON_THROW_ON_ERROR));
         } catch (JsonException $e) {
-            print 'Invalid JSON.' . PHP_EOL . $e->getMessage() . PHP_EOL;
+            print 'Invalid JSON.' . PHP_EOL . $e->getMessage();
             die(255);
         }
 
-        print "Inserted. 1 row affected." . PHP_EOL;
+        print "Inserted. 1 row affected.";
         die(0);
     }
 
@@ -74,7 +74,7 @@ class JsonDBServ
 
         $jsonDB->delete($idCol, $idVal);
 
-        print "Deleted. 1 row affected." . PHP_EOL;
+        print "Deleted. 1 row affected.";
         die(0);
     }
 
@@ -149,7 +149,7 @@ class JsonDBServ
         $count = count($jsonDB->getContent());
         $jsonDB->deleteAll();
 
-        print "Deleted. $count rows affected." . PHP_EOL;
+        print "Deleted. $count rows affected.";
         die(0);
     }
 
@@ -161,7 +161,7 @@ class JsonDBServ
     {
         $table = $arguments[0] ?? null;
         if (empty($table)) {
-            print 'Usage: jsondbserver <command> <arguments>' . PHP_EOL;
+            print 'Usage: jsondbserver <command> <arguments>';
             die(255);
         }
 

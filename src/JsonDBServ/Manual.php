@@ -26,7 +26,7 @@ class Manual {
         }
 
         $output .= PHP_EOL;
-        $output .= 'For more information about a command, use: jsondbserver help <command>' . PHP_EOL;
+        $output .= 'For more information about a command, use: jsondbserver help <command>';
 
         print $output;
         die(0);
