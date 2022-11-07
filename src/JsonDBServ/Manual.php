@@ -44,6 +44,14 @@ Usage: jsondbserver delete <table> <idCol> <idVal>
 EOT;
     }
 
+    private static function deletetable()
+    {
+        echo <<<EOT
+Usage: jsondbserver deletetable <table>
+EOT;
+    }
+
+
     private static function update() {
         echo <<<EOT
 Usage: jsondbserver update <table> <idCol> <idVal> <newRowData>
