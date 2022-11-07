@@ -1,5 +1,16 @@
 # jsondbserver
 
+## What is JSONDBSERVER?
+
+JSONDBServer is a simple, fast, and lightweight JSON database server. 
+It is written in PHP and writes into table files in JSON format.
+It can be used as a simple database server for small projects.
+
+It has support for complicated select statements (where, and/or, etc), aswell as pagination and sorting.
+Select statement also have LIKE support, such as "%john%" or "john%" or "%john".
+
+You can use the jsondbserver.php as a cli tool to execute commands or the JsonDB class to use it in your own php project.
+
 ## Installation
 
 ```git clone https://github.com/TimAnthonyAlexander/jsondbserver ~/jsondbserver```
