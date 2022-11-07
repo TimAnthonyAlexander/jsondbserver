@@ -4,7 +4,7 @@
 
 ```git clone https://github.com/TimAnthonyAlexander/jsondbserver ~/jsondbserver```
 
-```sudo ~/jsondbserver/install.sh```
+```sudo ~/jsondbserver/bin/install.sh```
 
 ## Usage
 
