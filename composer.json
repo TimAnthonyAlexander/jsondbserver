@@ -1,0 +1,15 @@
+{
+    "autoload":{
+        "classmap": [
+            "src/"
+        ]
+    },
+    "require": {
+        "league/uri": "^6.8",
+        "ext-mbstring": "*"
+    }
+    ,
+    "require-dev": {
+        "roave/security-advisories": "dev-latest"
+    }
+}
